@@ -1,0 +1,43 @@
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* For IE, Edge and Firefox */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+
+  .response {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .success {
+    background-color: green;
+    color: white;
+  }
+  
+  .error {
+    background-color: red;
+    color: white;
+  }
+  
+  .warning {
+    background-color: orange;
+    color: white;
+  }
+  
+  .info {
+    background-color: blue;
+    color: white;
+  }
+  
+  .default {
+    background-color: gray;
+    color: white;
+  }
+  
