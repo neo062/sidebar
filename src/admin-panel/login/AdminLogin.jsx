@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-
-export const Login = () => {
+export const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
+  const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -16,46 +16,43 @@ export const Login = () => {
   };
 
 
-  const token = localStorage.getItem('token');
+  // const token = localStorage.getItem('token');
 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     try {
       const response = await fetch(
-        `https://two1genx.onrender.com/v1/auth/admin/login`,
+        "https://two1genx.onrender.com/v1/auth/admin/login",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            
           },
           body: JSON.stringify({ email, password }),
-  
-        },
-        
+        }
       );
-
-      
-
+  
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("refresh_token", data.refresh_token);
         localStorage.setItem("userId", data.userId);
-        window.location.href=`admin-categories`
-        console.log(data)
+        const isAuthenticated = true;
+        setIsAuthenticated(isAuthenticated);
+  
+        navigate("/category");
+        console.log(data);
       } else {
-        setError(data.message);
+        throw new Error("Login failed");
       }
     } catch (error) {
       console.error(error);
       setError("Something went wrong.");
     }
-
   };
-
+  
  
 
   return (
